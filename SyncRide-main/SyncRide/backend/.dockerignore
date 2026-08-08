@@ -1,0 +1,22 @@
+.git
+.gitignore
+.env
+.idea/
+.vscode/
+
+# Build outputs
+/bin/
+/build/
+/dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go cache
+.cache/
+go.sum
+vendor/

@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package ride;
+
+option go_package = "syncride/backend/shared/proto/ride";
+
+service RideService {
+  rpc CreateRide (CreateRideRequest) returns (RideResponse);
+  rpc GetRide (GetRideRequest) returns (RideResponse);
+  rpc AcceptRide (AcceptRideRequest) returns (RideResponse);
+  rpc CancelRide (CancelRideRequest) returns (RideResponse);
+}
+
+enum RideStatus {
+  REQUESTED = 0;
+  ACCEPTED = 1;
+  IN_PROGRESS = 2;
+  COMPLETED = 3;
+  CANCELLED = 4;
+}
+
+message CreateRideRequest {
+  string passenger_id = 1;
+  double pickup_lat = 2;
+  double pickup_lng = 3;
+  double destination_lat = 4;
+  double destination_lng = 5;
+  double fare = 6;
+}
+
+message GetRideRequest {
+  string ride_id = 1;
+}
+
+message AcceptRideRequest {
+  string ride_id = 1;
+  string driver_id = 2;
+}
+
+message CancelRideRequest {
+  string ride_id = 1;
+}
+
+message RideResponse {
+  string id = 1;
+  string passenger_id = 2;
+  string driver_id = 3;
+  double pickup_lat = 4;
+  double pickup_lng = 5;
+  double destination_lat = 6;
+  double destination_lng = 7;
+  double fare = 8;
+  RideStatus status = 9;
+  string created_at = 10;
+}

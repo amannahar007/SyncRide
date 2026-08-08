@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package pricing;
+
+option go_package = "syncride/backend/shared/proto/pricing";
+
+service PricingService {
+  rpc EstimateFare (EstimateFareRequest) returns (FareResponse);
+  rpc GetFareRule (GetFareRuleRequest) returns (FareRuleResponse);
+}
+
+message EstimateFareRequest {
+  double distance_km = 1;
+  double duration_minutes = 2;
+  string ride_type = 3;
+}
+
+message FareResponse {
+  double estimated_fare = 1;
+  string currency = 2;
+}
+
+message GetFareRuleRequest {
+  string ride_type = 1;
+}
+
+message FareRuleResponse {
+  string ride_type = 1;
+  double base_fare = 2;
+  double per_km_rate = 3;
+  double per_minute_rate = 4;
+  double minimum_fare = 5;
+}

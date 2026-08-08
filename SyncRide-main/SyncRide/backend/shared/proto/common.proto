@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package syncride.common;
+
+option go_package = "github.com/syncride/backend/shared/proto/common";
+
+message Location {
+  double latitude = 1;
+  double longitude = 2;
+  string address = 3;
+}
+
+message UserContext {
+  string user_id = 1;
+  string role = 2;
+  string request_id = 3;
+}
+
+message StatusResponse {
+  bool success = 1;
+  string message = 2;
+  int64 timestamp = 3;
+}

@@ -1,0 +1,16 @@
+go 1.26.5
+
+use (
+	./analytics-service
+	./api-gateway
+	./auth-service
+	./driver-service
+	./maps-service
+	./notification-service
+	./passenger-service
+	./payment-service
+	./pricing-service
+	./ride-service
+	./shared
+	./trip-service
+)

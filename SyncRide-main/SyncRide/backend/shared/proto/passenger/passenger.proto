@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package passenger;
+
+option go_package = "github.com/syncride/backend/shared/proto/passenger;passenger";
+
+service PassengerService {
+  rpc GetPassenger (GetPassengerRequest) returns (PassengerResponse);
+  rpc CreatePassenger (CreatePassengerRequest) returns (PassengerResponse);
+  rpc UpdatePassenger (UpdatePassengerRequest) returns (PassengerResponse);
+}
+
+message PassengerResponse {
+  string id = 1;
+  string user_id = 2;
+  string full_name = 3;
+  string phone_number = 4;
+  double rating = 5;
+  string created_at = 6;
+}
+
+message GetPassengerRequest {
+  string user_id = 1;
+}
+
+message CreatePassengerRequest {
+  string user_id = 1;
+  string full_name = 2;
+  string phone_number = 3;
+}
+
+message UpdatePassengerRequest {
+  string user_id = 1;
+  string full_name = 2;
+}

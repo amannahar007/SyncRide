@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package maps;
+
+option go_package = "syncride/backend/shared/proto/maps";
+
+service MapsService {
+  rpc GetRoute (GetRouteRequest) returns (RouteResponse);
+  rpc GetNearbyDrivers (GetNearbyDriversRequest) returns (NearbyDriversResponse);
+}
+
+message GetRouteRequest {
+  double origin_lat = 1;
+  double origin_lng = 2;
+  double dest_lat = 3;
+  double dest_lng = 4;
+}
+
+message RouteResponse {
+  double distance_meters = 1;
+  int64 duration_seconds = 2;
+  string polyline = 3; // Encoded polyline to draw on the Android map
+}
+
+message GetNearbyDriversRequest {
+  double passenger_lat = 1;
+  double passenger_lng = 2;
+  double radius_meters = 3;
+}
+
+message DriverLocation {
+  string driver_id = 1;
+  double lat = 2;
+  double lng = 3;
+  double distance_meters = 4;
+}
+
+message NearbyDriversResponse {
+  repeated DriverLocation drivers = 1;
+}

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package notification;
+
+option go_package = "syncride/backend/shared/proto/notification";
+
+service NotificationService {
+  rpc SendPushNotification (PushRequest) returns (NotificationResponse);
+  rpc SendSMS (SMSRequest) returns (NotificationResponse);
+}
+
+message PushRequest {
+  string user_id = 1;
+  string fcm_token = 2;
+  string title = 3;
+  string body = 4;
+  map<string, string> data = 5; // Deep linking or silent data payloads
+}
+
+message SMSRequest {
+  string phone_number = 1;
+  string message = 2;
+}
+
+message NotificationResponse {
+  bool success = 1;
+  string provider_message_id = 2;
+  string error_message = 3;
+}

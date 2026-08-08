@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F3F4F6">
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:elevation="2dp">
+        <TextView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="←"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#111827"
+            android:paddingEnd="16dp"
+            android:clickable="true"
+            android:focusable="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#111827"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Account Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Account"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#6B7280"
+                android:layout_marginBottom="8dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:paddingHorizontal="16dp">
+                <TextView android:id="@+id/settingProfile" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Profile Details" android:textSize="16sp" android:textColor="#111827" android:paddingVertical="16dp" android:clickable="true" android:focusable="true"/>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F3F4F6"/>
+                <TextView android:id="@+id/settingAddress" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Manage Address" android:textSize="16sp" android:textColor="#111827" android:paddingVertical="16dp" android:clickable="true" android:focusable="true"/>
+            </LinearLayout>
+
+            <!-- App Settings -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="App Settings"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#6B7280"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:paddingHorizontal="16dp">
+                <TextView android:id="@+id/settingNotifications" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Notifications" android:textSize="16sp" android:textColor="#111827" android:paddingVertical="16dp" android:clickable="true" android:focusable="true"/>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F3F4F6"/>
+                <TextView android:id="@+id/settingPrivacy" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Privacy &amp; Safety" android:textSize="16sp" android:textColor="#111827" android:paddingVertical="16dp" android:clickable="true" android:focusable="true"/>
+            </LinearLayout>
+
+            <!-- Support -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Support"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#6B7280"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:paddingHorizontal="16dp">
+                <TextView android:id="@+id/settingHelp" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Help Center" android:textSize="16sp" android:textColor="#111827" android:paddingVertical="16dp" android:clickable="true" android:focusable="true"/>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F3F4F6"/>
+                <TextView android:id="@+id/settingAbout" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="About SyncRide" android:textSize="16sp" android:textColor="#111827" android:paddingVertical="16dp" android:clickable="true" android:focusable="true"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#EF4444"
+                android:gravity="center"
+                android:background="#FFFFFF"
+                android:paddingVertical="16dp"
+                android:layout_marginTop="32dp"
+                android:clickable="true"
+                android:focusable="true"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Version 1.0.2 (Rajasthan Edition)"
+                android:textSize="12sp"
+                android:textColor="#9CA3AF"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

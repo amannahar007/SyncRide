@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "69456297572",
+    "project_id": "syncride-3cf02",
+    "storage_bucket": "syncride-3cf02.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69456297572:android:91146b0020821ea4cf6971",
+        "android_client_info": {
+          "package_name": "com.syncride.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNxtq0PQGVnGo7qgJrCCqeiSh4_DyM6Tc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69456297572:android:91146b0020821ea4cf6971",
+        "android_client_info": {
+          "package_name": "com.company.syncride"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNxtq0PQGVnGo7qgJrCCqeiSh4_DyM6Tc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

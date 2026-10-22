@@ -1,11 +1,13 @@
-﻿package grpc
+package grpc
 
 import (
 	"context"
+	"log"
 	"time"
 
 	"github.com/syncride/backend/ride-service/internal/models"
 	"github.com/syncride/backend/ride-service/internal/repository"
+	"github.com/syncride/backend/shared/kafka"
 	pb "github.com/syncride/backend/shared/proto/ride"
 
 	"google.golang.org/grpc/codes"
@@ -14,11 +16,15 @@ import (
 
 type RideHandler struct {
 	pb.UnimplementedRideServiceServer
-	repo repository.RideRepository
+	repo     repository.RideRepository
+	producer *kafka.Producer
 }
 
-func NewRideHandler(repo repository.RideRepository) *RideHandler {
-	return &RideHandler{repo: repo}
+func NewRideHandler(repo repository.RideRepository, producer *kafka.Producer) *RideHandler {
+	return &RideHandler{
+		repo:     repo,
+		producer: producer,
+	}
 }
 
 func (h *RideHandler) RequestRide(ctx context.Context, req *pb.RequestRideRequest) (*pb.RideResponse, error) {
@@ -36,7 +42,21 @@ func (h *RideHandler) RequestRide(ctx context.Context, req *pb.RequestRideReques
 		return nil, status.Errorf(codes.Internal, "failed to request ride: %v", err)
 	}
 
-	// TODO: Publish Kafka event 'ride.requested' here for the matching engine
+	// Publish Kafka event 'ride.requested' for the matching engine
+	if h.producer != nil {
+		evt := kafka.RideRequestedEvent{
+			RideID:      ride.ID,
+			PassengerID: ride.PassengerID,
+			PickupLat:   ride.PickupLat,
+			PickupLng:   ride.PickupLng,
+			DropoffLat:  ride.DropoffLat,
+			DropoffLng:  ride.DropoffLng,
+			RequestedAt: ride.CreatedAt,
+		}
+		if err := h.producer.PublishRideRequested(ctx, evt); err != nil {
+			log.Printf("[Warning] Failed to publish ride.requested Kafka event: %v", err)
+		}
+	}
 
 	return mapToProtoResponse(ride), nil
 }
@@ -106,3 +126,4 @@ func mapToProtoResponse(r *models.Ride) *pb.RideResponse {
 		CreatedAt:   r.CreatedAt.Format(time.RFC3339),
 	}
 }
+

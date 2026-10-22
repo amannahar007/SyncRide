@@ -14,18 +14,28 @@ const (
 	RideStatus_CANCELLED   RideStatus = 4
 )
 
-type CreateRideRequest struct {
-	PassengerId    string  `protobuf:"bytes,1,opt,name=passenger_id,json=passengerId,proto3" json:"passenger_id,omitempty"`
-	PickupLat      float64 `protobuf:"fixed64,2,opt,name=pickup_lat,json=pickupLat,proto3" json:"pickup_lat,omitempty"`
-	PickupLng      float64 `protobuf:"fixed64,3,opt,name=pickup_lng,json=pickupLng,proto3" json:"pickup_lng,omitempty"`
-	DestinationLat float64 `protobuf:"fixed64,4,opt,name=destination_lat,json=destinationLat,proto3" json:"destination_lat,omitempty"`
-	DestinationLng float64 `protobuf:"fixed64,5,opt,name=destination_lng,json=destinationLng,proto3" json:"destination_lng,omitempty"`
-	Fare           float64 `protobuf:"fixed64,6,opt,name=fare,proto3" json:"fare,omitempty"`
+type RequestRideRequest struct {
+	PassengerId string  `protobuf:"bytes,1,opt,name=passenger_id,json=passengerId,proto3" json:"passenger_id,omitempty"`
+	PickupLat   float64 `protobuf:"fixed64,2,opt,name=pickup_lat,json=pickupLat,proto3" json:"pickup_lat,omitempty"`
+	PickupLng   float64 `protobuf:"fixed64,3,opt,name=pickup_lng,json=pickupLng,proto3" json:"pickup_lng,omitempty"`
+	DropoffLat  float64 `protobuf:"fixed64,4,opt,name=dropoff_lat,json=dropoffLat,proto3" json:"dropoff_lat,omitempty"`
+	DropoffLng  float64 `protobuf:"fixed64,5,opt,name=dropoff_lng,json=dropoffLng,proto3" json:"dropoff_lng,omitempty"`
+	RideType    string  `protobuf:"bytes,6,opt,name=ride_type,json=rideType,proto3" json:"ride_type,omitempty"`
 }
 
-func (x *CreateRideRequest) Reset()         {}
-func (x *CreateRideRequest) String() string { return x.PassengerId }
-func (x *CreateRideRequest) ProtoMessage()  {}
+func (x *RequestRideRequest) Reset()         {}
+func (x *RequestRideRequest) String() string { return x.PassengerId }
+func (x *RequestRideRequest) ProtoMessage()  {}
+
+type UpdateRideStatusRequest struct {
+	RideId   string     `protobuf:"bytes,1,opt,name=ride_id,json=rideId,proto3" json:"ride_id,omitempty"`
+	DriverId string     `protobuf:"bytes,2,opt,name=driver_id,json=driverId,proto3" json:"driver_id,omitempty"`
+	Status   RideStatus `protobuf:"varint,3,opt,name=status,proto3,enum=ride.RideStatus" json:"status,omitempty"`
+}
+
+func (x *UpdateRideStatusRequest) Reset()         {}
+func (x *UpdateRideStatusRequest) String() string { return x.RideId }
+func (x *UpdateRideStatusRequest) ProtoMessage()  {}
 
 type GetRideRequest struct {
 	RideId string `protobuf:"bytes,1,opt,name=ride_id,json=rideId,proto3" json:"ride_id,omitempty"`
@@ -35,36 +45,15 @@ func (x *GetRideRequest) Reset()         {}
 func (x *GetRideRequest) String() string { return x.RideId }
 func (x *GetRideRequest) ProtoMessage()  {}
 
-type AcceptRideRequest struct {
-	RideId   string `protobuf:"bytes,1,opt,name=ride_id,json=rideId,proto3" json:"ride_id,omitempty"`
-	DriverId string `protobuf:"bytes,2,opt,name=driver_id,json=driverId,proto3" json:"driver_id,omitempty"`
-}
-
-func (x *AcceptRideRequest) Reset()         {}
-func (x *AcceptRideRequest) String() string { return x.RideId }
-func (x *AcceptRideRequest) ProtoMessage()  {}
-
-type CancelRideRequest struct {
-	RideId string `protobuf:"bytes,1,opt,name=ride_id,json=rideId,proto3" json:"ride_id,omitempty"`
-}
-
-func (x *CancelRideRequest) Reset()         {}
-func (x *CancelRideRequest) String() string { return x.RideId }
-func (x *CancelRideRequest) ProtoMessage()  {}
-
 type RideResponse struct {
-	Id             string     `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	PassengerId    string     `protobuf:"bytes,2,opt,name=passenger_id,json=passengerId,proto3" json:"passenger_id,omitempty"`
-	DriverId       string     `protobuf:"bytes,3,opt,name=driver_id,json=driverId,proto3" json:"driver_id,omitempty"`
-	PickupLat      float64    `protobuf:"fixed64,4,opt,name=pickup_lat,json=pickupLat,proto3" json:"pickup_lat,omitempty"`
-	PickupLng      float64    `protobuf:"fixed64,5,opt,name=pickup_lng,json=pickupLng,proto3" json:"pickup_lng,omitempty"`
-	DestinationLat float64    `protobuf:"fixed64,6,opt,name=destination_lat,json=destinationLat,proto3" json:"destination_lat,omitempty"`
-	DestinationLng float64    `protobuf:"fixed64,7,opt,name=destination_lng,json=destinationLng,proto3" json:"destination_lng,omitempty"`
-	Fare           float64    `protobuf:"fixed64,8,opt,name=fare,proto3" json:"fare,omitempty"`
-	Status         RideStatus `protobuf:"varint,9,opt,name=status,proto3,enum=ride.RideStatus" json:"status,omitempty"`
-	CreatedAt      string     `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Id          string     `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	PassengerId string     `protobuf:"bytes,2,opt,name=passenger_id,json=passengerId,proto3" json:"passenger_id,omitempty"`
+	DriverId    string     `protobuf:"bytes,3,opt,name=driver_id,json=driverId,proto3" json:"driver_id,omitempty"`
+	Status      RideStatus `protobuf:"varint,4,opt,name=status,proto3,enum=ride.RideStatus" json:"status,omitempty"`
+	CreatedAt   string     `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 }
 
 func (x *RideResponse) Reset()         {}
 func (x *RideResponse) String() string { return x.Id }
 func (x *RideResponse) ProtoMessage()  {}
+

@@ -2,28 +2,20 @@ package models
 
 import (
 	"time"
-
 	"gorm.io/gorm"
 )
 
-type PaymentStatus string
-type PaymentMethod string
+type TransactionType string
 
 const (
-	PaymentPending PaymentStatus = "PENDING"
-	PaymentSuccess PaymentStatus = "SUCCESS"
-	PaymentFailed  PaymentStatus = "FAILED"
-
-	MethodWallet PaymentMethod = "WALLET"
-	MethodCash   PaymentMethod = "CASH"
-	MethodCard   PaymentMethod = "CARD"
-	MethodUPI    PaymentMethod = "UPI"
+	TxTypeCredit TransactionType = "CREDIT" // Top-ups or refunds
+	TxTypeDebit  TransactionType = "DEBIT"  // Ride payments
 )
 
 type Wallet struct {
 	ID        string         `gorm:"type:uuid;default:gen_random_uuid();primaryKey"`
 	UserID    string         `gorm:"type:uuid;uniqueIndex;not null"`
-	Balance   float64        `gorm:"default:0.00;not null"`
+	Balance   float64        `gorm:"default:0.0"`
 	Currency  string         `gorm:"size:3;default:'INR'"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
@@ -31,13 +23,11 @@ type Wallet struct {
 }
 
 type Transaction struct {
-	ID            string        `gorm:"type:uuid;default:gen_random_uuid();primaryKey"`
-	UserID        string        `gorm:"type:uuid;index;not null"`
-	TripID        *string       `gorm:"type:uuid;index"`
-	Amount        float64       `gorm:"not null"`
-	PaymentMethod PaymentMethod `gorm:"type:varchar(20);not null"`
-	Status        PaymentStatus `gorm:"type:varchar(20);default:'PENDING'"`
-	CreatedAt     time.Time
-	UpdatedAt     time.Time
-	DeletedAt     gorm.DeletedAt `gorm:"index"`
+	ID          string          `gorm:"type:uuid;default:gen_random_uuid();primaryKey"`
+	WalletID    string          `gorm:"type:uuid;index;not null"`
+	Amount      float64         `gorm:"not null"`
+	Type        TransactionType `gorm:"type:varchar(10);not null"`
+	ReferenceID string          `gorm:"size:100"` // Can be Trip ID or Stripe Charge ID
+	Status      string          `gorm:"size:20;default:'SUCCESS'"`
+	CreatedAt   time.Time
 }

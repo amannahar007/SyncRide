@@ -7,7 +7,6 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
 
 	"github.com/go-chi/chi/v5"
 	"go.uber.org/zap"
@@ -33,7 +32,7 @@ func main() {
 	}
 
 	// 2. Initialize Logger
-	log, err := logger.NewZapLogger(cfg.App.Environment, cfg.App.LogLevel)
+	log, err := logger.InitLogger(constants.ServiceAuth, cfg.App.LogLevel)
 	if err != nil {
 		fmt.Printf("Failed to initialize logger: %v\n", err)
 		os.Exit(1)

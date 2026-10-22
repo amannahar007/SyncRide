@@ -7,55 +7,33 @@ option go_package = "syncride/backend/shared/proto/trip";
 service TripService {
   rpc StartTrip (StartTripRequest) returns (TripResponse);
   rpc CompleteTrip (CompleteTripRequest) returns (TripResponse);
-  rpc RecordTelemetry (RecordTelemetryRequest) returns (TelemetryResponse);
-  rpc GetTrip (GetTripRequest) returns (TripResponse);
-}
-
-enum TripStatus {
-  STARTED = 0;
-  COMPLETED = 1;
-  CANCELLED = 2;
+  rpc UpdateTripTelemetry (UpdateTripTelemetryRequest) returns (TelemetryResponse);
 }
 
 message StartTripRequest {
   string ride_id = 1;
   string driver_id = 2;
-  string passenger_id = 3;
-  double start_lat = 4;
-  double start_lng = 5;
 }
 
 message CompleteTripRequest {
   string trip_id = 1;
-  double end_lat = 2;
-  double end_lng = 3;
-  double final_fare = 4;
+  double final_lat = 2;
+  double final_lng = 3;
 }
 
-message RecordTelemetryRequest {
+message UpdateTripTelemetryRequest {
   string trip_id = 1;
-  double latitude = 2;
-  double longitude = 3;
-  double speed = 4;
-}
-
-message GetTripRequest {
-  string trip_id = 1;
-}
-
-message TelemetryResponse {
-  bool success = 1;
+  double current_lat = 2;
+  double current_lng = 3;
 }
 
 message TripResponse {
   string id = 1;
   string ride_id = 2;
-  string driver_id = 3;
-  string passenger_id = 4;
-  TripStatus status = 5;
-  double current_lat = 6;
-  double current_lng = 7;
-  double fare = 8;
-  string started_at = 9;
-  string completed_at = 10;
+  string start_time = 3;
+  string end_time = 4; // Empty if trip is active
+}
+
+message TelemetryResponse {
+  bool success = 1;
 }
